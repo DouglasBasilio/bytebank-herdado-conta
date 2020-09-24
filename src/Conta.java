@@ -1,5 +1,7 @@
-public class Conta {
-	private double saldo;
+// A classe ainda existe, mas não pode mais criar um objeto dessa classe
+
+public abstract class Conta {
+	protected double saldo;
 	private int agencia;
 	private int numero;
 	private Cliente titular;
@@ -14,9 +16,8 @@ public class Conta {
 		//System.out.println("Estou criando a conta " + this.numero);
 	}
 
-	public void deposita(double valor) {
-		this.saldo += valor;
-	}
+	// Os filhos precisam implementar o método "deposita"
+	public abstract void deposita(double valor);
 
 	public boolean saca(double valor) {
 		if (this.saldo >= valor) {
