@@ -1,14 +1,13 @@
 //new ContaCorrente()
-public class ContaCorrente extends Conta {
-	
-	
+public class ContaCorrente extends Conta implements Tributavel {
+
 	public ContaCorrente(int agencia, int numero) {
 		super(agencia, numero);
 	}
-	
+
 	@Override
 	// Anotação na configuração, sobreescreer método
-	//reaproveitamento de código
+	// reaproveitamento de código
 	public boolean saca(double valor) {
 		double valorASacar = valor + 0.2;
 		return super.saca(valorASacar);
@@ -18,6 +17,11 @@ public class ContaCorrente extends Conta {
 	// adicionado esboço do método
 	public void deposita(double valor) {
 		super.saldo += valor;
-		
+
+	}
+
+	@Override
+	public double getValorImposto() {
+		return super.saldo * 0.01;
 	}
 }
