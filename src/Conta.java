@@ -6,38 +6,33 @@ public abstract class Conta {
 	private int numero;
 	private Cliente titular;
 	private static int total; // static é da classe, no caso class Conta
-	
+
 	// constructor
 	public Conta(int agencia, int numero) {
 		Conta.total++;
-		//System.out.println("O total de contas é " + Conta.total);		
+		// System.out.println("O total de contas é " + Conta.total);
 		this.agencia = agencia;
 		this.numero = numero;
-		//System.out.println("Estou criando a conta " + this.numero);
+		// System.out.println("Estou criando a conta " + this.numero);
 	}
 
 	// Os filhos precisam implementar o método "deposita"
 	public abstract void deposita(double valor);
 
-	public boolean saca(double valor) {
-		if (this.saldo >= valor) {
-			this.saldo -= valor;
-			System.out.println("Operação realizada com sucesso");
-			return true;
-		} else {
-			System.out.println("Saldo insuficiente para esta operação");
-			return false;
+	public void saca(double valor) {
+		if (this.saldo < valor) {
+			// problema
+			throw new SaldoInsuficienteException("Saldo: " + this.saldo + ", Valor: " + valor);
 		}
+		this.saldo -= valor;
 	}
 
-	public boolean transfere(double valor, Conta destino) {
+	public void transfere(double valor, Conta destino) {
 		// this.saca (chama o método saca)
-		if (this.saca(valor)) {
-			destino.deposita(valor);
-			return true;
-		} else {
-			return false;
-		}
+		// só será possível depositar se o método saca() funcionar
+		// caso não funcione, sairá desse método
+		this.saca(valor);
+		destino.deposita(valor);
 	}
 
 	public double getSaldo() {
@@ -75,7 +70,7 @@ public abstract class Conta {
 	public Cliente getTitular() {
 		return titular;
 	}
-	
+
 	// preciso falar que o método é da Classe através do static
 	public static int getTotal() {
 		return Conta.total;
