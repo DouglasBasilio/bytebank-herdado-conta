@@ -1,3 +1,4 @@
+package br.com.bytebank.banco.modelo;
 // A classe ainda existe, mas não pode mais criar um objeto dessa classe
 
 public abstract class Conta {

@@ -1,3 +1,5 @@
+package br.com.bytebank.banco.modelo;
+
 //Tudo é abstrato dentro de uma interface
 public interface Tributavel {
 	// dentro de uma interface, tudo é público e abstrato
