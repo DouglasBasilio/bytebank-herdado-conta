@@ -1,4 +1,12 @@
 package br.com.bytebank.banco.modelo;
+
+/**
+ * Classe representa a moldura de uma conta
+ * 
+ * @author Douglas
+ *
+ */
+
 // A classe ainda existe, mas não pode mais criar um objeto dessa classe
 
 public abstract class Conta {
@@ -8,7 +16,12 @@ public abstract class Conta {
 	private Cliente titular;
 	private static int total; // static é da classe, no caso class Conta
 
-	// constructor
+	/**
+	 * Construtor para inicializar o objeto Conta a partir da agencia e numero
+	 * 
+	 * @param agencia
+	 * @param numero
+	 */
 	public Conta(int agencia, int numero) {
 		Conta.total++;
 		// System.out.println("O total de contas é " + Conta.total);
@@ -20,9 +33,15 @@ public abstract class Conta {
 	// Os filhos precisam implementar o método "deposita"
 	public abstract void deposita(double valor);
 
+	
+	/**
+	 * Valor precisa ser maior que o saldo
+	 * 
+	 * @param valor
+	 * @throws SaldoInsuficienteException
+	 */
 	public void saca(double valor) {
 		if (this.saldo < valor) {
-			// problema
 			throw new SaldoInsuficienteException("Saldo: " + this.saldo + ", Valor: " + valor);
 		}
 		this.saldo -= valor;
@@ -75,5 +94,13 @@ public abstract class Conta {
 	// preciso falar que o método é da Classe através do static
 	public static int getTotal() {
 		return Conta.total;
+	}
+	
+	@Override
+	public String toString() {
+		return "Número: " +
+				this.numero +
+				" - Agência: " +
+				this.agencia;
 	}
 }
