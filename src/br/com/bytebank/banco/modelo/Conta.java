@@ -33,7 +33,6 @@ public abstract class Conta {
 	// Os filhos precisam implementar o método "deposita"
 	public abstract void deposita(double valor);
 
-	
 	/**
 	 * Valor precisa ser maior que o saldo
 	 * 
@@ -95,12 +94,30 @@ public abstract class Conta {
 	public static int getTotal() {
 		return Conta.total;
 	}
+
 	
+	// Dentro do equals, o método recebe um Object, um tipo genérico
+	// para o ref ter atributos 'agencia' e 'numero',
+	// precisamos transformar a ref genérica em uma específica, fazendo um 'cast'
+	@Override
+
+	public boolean equals(Object ref) {
+
+		Conta outra = (Conta) ref;
+
+		if (this.agencia != outra.agencia) {
+			return false;
+		}
+
+		if (this.numero != outra.numero) {
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		return "Número: " +
-				this.numero +
-				" - Agência: " +
-				this.agencia;
+		return "Número: " + this.numero + " - Agência: " + this.agencia;
 	}
 }
